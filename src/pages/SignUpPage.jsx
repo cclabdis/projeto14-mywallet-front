@@ -21,7 +21,8 @@ export default function SignUpPage() {
 
   const signUp = useSignUpAuth()
 
-  function submitForm(e) {e.preventDefault()
+  function submitForm(e) 
+    {e.preventDefault()
     if (forms.password !== forms.confirmPassword) return alert("As senhas divergem")
 
     delete forms.confirmPassword
@@ -33,14 +34,14 @@ export default function SignUpPage() {
     <SingUpContainer>
       <form onSubmit={submitForm}>
         <MyWalletLogo />
-        <input
+        <input data-test="name" 
           required
           placeholder="Nome"
           name="name"
           value={forms.name}
           onChange={handleForms}
         />
-        <input
+        <input data-test="email"
           required
           type="email"
           autoComplete="username"
@@ -49,7 +50,7 @@ export default function SignUpPage() {
           value={forms.email}
           onChange={handleForms}
         />
-        <input
+        <input  data-test="password" 
           required
           minLength={3}
           type="password"
@@ -59,7 +60,7 @@ export default function SignUpPage() {
           value={forms.password}
           onChange={handleForms}
         />
-        <input
+        <input data-test="conf-password" 
           required
           minLength={3}
           type="password"

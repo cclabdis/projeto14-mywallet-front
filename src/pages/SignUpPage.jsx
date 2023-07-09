@@ -3,12 +3,14 @@ import styled from "styled-components"
 import MyWalletLogo from "../components/MyWalletLogo"
 import useIn from "../components/hooks/useIn"
 import { useSignUpAuth } from "../components/authorizations/auth"
+import useForms from "../components/hooks/useForms"
+
 
 
 
 export default function SignUpPage() {
 
-  const { forms, handleForms } = useForm(
+  const { forms, handleForms } = useForms(
     { name: "", 
     email: "", 
     password: "", 
@@ -35,8 +37,8 @@ export default function SignUpPage() {
           required
           placeholder="Nome"
           name="name"
-          value={form.name}
-          onChange={handleForm}
+          value={forms.name}
+          onChange={handleForms}
         />
         <input
           required
@@ -44,8 +46,8 @@ export default function SignUpPage() {
           autoComplete="username"
           placeholder="E-mail"
           name="email"
-          value={form.email}
-          onChange={handleForm}
+          value={forms.email}
+          onChange={handleForms}
         />
         <input
           required
@@ -54,8 +56,8 @@ export default function SignUpPage() {
           autoComplete="new-password"
           placeholder="Senha"
           name="password"
-          value={form.password}
-          onChange={handleForm}
+          value={forms.password}
+          onChange={handleForms}
         />
         <input
           required
@@ -64,8 +66,8 @@ export default function SignUpPage() {
           autoComplete="new-password"
           placeholder="Confirme a senha"
           name="confirmPassword"
-          value={form.confirmPassword}
-          onChange={handleForm}
+          value={forms.confirmPassword}
+          onChange={handleForms}
         />
         <button type="submit">Cadastrar</button>
       </form>

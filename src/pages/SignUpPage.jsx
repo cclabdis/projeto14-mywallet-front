@@ -6,8 +6,6 @@ import { useSignUpAuth } from "../components/authorizations/auth"
 import useForms from "../components/hooks/useForms"
 
 
-
-
 export default function SignUpPage() {
 
   const { forms, handleForms } = useForms(
@@ -34,14 +32,16 @@ export default function SignUpPage() {
     <SingUpContainer>
       <form onSubmit={submitForm}>
         <MyWalletLogo />
-        <input data-test="name" 
+        <input 
+          data-test="name" 
           required
           placeholder="Nome"
           name="name"
           value={forms.name}
           onChange={handleForms}
         />
-        <input data-test="email"
+        <input 
+          data-test="email"
           required
           type="email"
           autoComplete="username"
@@ -50,7 +50,8 @@ export default function SignUpPage() {
           value={forms.email}
           onChange={handleForms}
         />
-        <input  data-test="password" 
+        <input  
+          data-test="password" 
           required
           minLength={3}
           type="password"
@@ -60,7 +61,8 @@ export default function SignUpPage() {
           value={forms.password}
           onChange={handleForms}
         />
-        <input data-test="conf-password" 
+        <input 
+          data-test="conf-password" 
           required
           minLength={3}
           type="password"
@@ -70,7 +72,11 @@ export default function SignUpPage() {
           value={forms.confirmPassword}
           onChange={handleForms}
         />
-        <button data-test="sign-up-submit" type="submit">Cadastrar</button>
+        <button 
+        data-test="sign-up-submit" 
+        type="submit">
+          Cadastrar
+        </button>
       </form>
 
       <Link to="/">

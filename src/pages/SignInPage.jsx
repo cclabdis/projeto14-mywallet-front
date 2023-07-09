@@ -12,7 +12,7 @@ export default function SignInPage() {
   const login = useLoginAuth()
   useIn()
 
-  function submitForm(e) {
+  function submitForms(e) {
     e.preventDefault()
     login(forms)
   }
@@ -20,9 +20,10 @@ export default function SignInPage() {
 
   return (
     <SingInContainer>
-      <form onSubmit={submitForm}>
+      <form onSubmit={submitForms}>
         <MyWalletLogo />
         <input
+          data-test="email"
           required
           type="email"
           autoComplete="username"
@@ -32,6 +33,7 @@ export default function SignInPage() {
           onChange={handleForms}
         />
         <input
+          data-test="password"
           required
           minLength={3}
           type="password"
@@ -41,7 +43,7 @@ export default function SignInPage() {
           value={forms.password}
           onChange={handleForms}
         />
-        <button type="submit">Entrar</button>
+        <button data-test="sign-in-submit" type="submit">Entrar</button>
       </form>
 
       <Link to="/cadastro">

@@ -21,7 +21,7 @@ export function useForms(initialForms) {
     const [forms, setForms] = useState(initialForms)
 
     function handleForms(e) {
-        setForms({ ...form, [e.target.name]: e.target.value })
+        setForms({ ...forms, [e.target.name]: e.target.value })
     }
 
     return { forms, handleForms }

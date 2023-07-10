@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 import MyWalletLogo from "../components/MyWalletLogo"
-import useIn from "../components/hooks/useIn"
+import { useIn, useForms } from "../components/hooks/useIn"
 import { useSignUpAuth } from "../components/authorizations/auth"
-import useForms from "../components/hooks/useForms"
+import { useForms } from "../components/hooks/useIn"
 
 
 export default function SignUpPage() {

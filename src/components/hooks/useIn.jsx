@@ -1,13 +1,28 @@
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 import AuthContext from "../AuthContext"
 
-export default function useIn() {
+
+//entrada
+
+export function useIn() {
     const { userName, token } = useContext(AuthContext)
     const navigate = useNavigate()
 
     useEffect(() => {
         if (token && userName) navigate("/home")
     }, [])
+}
+
+///forms
+
+export function useForms(initialForms) {
+    const [forms, setForms] = useState(initialForms)
+
+    function handleForms(e) {
+        setForms({ ...form, [e.target.name]: e.target.value })
+    }
+
+    return { forms, handleForms }
 }

@@ -2,8 +2,8 @@ import styled from "styled-components"
 
 import useQuickOut from "../../hooks/useQuickOut"
 import { useParams } from "react-router-dom"
-import { useForms } from "../components/hooks/useIn"
-import { useAddTransaction } from "../../services/trans"
+import { useForms } from "../components/hooks/useIn.jsx"
+import { useAddTransaction } from "../components/authorizations/Transactions.jsx"
 
 
 export default function AddtransPage() {
@@ -15,7 +15,10 @@ export default function AddtransPage() {
 
   function submitForm(e) {
     e.preventDefault()
-    const body = { ...forms, type: type === "entrada" ? "income" : "expense" }
+    const body = { 
+      ...forms, 
+      type: type === "entrada" ? "income" : "expense" 
+    }
     addTransaction(body)
   }
 
@@ -24,6 +27,7 @@ export default function AddtransPage() {
       <h1>Nova {typeText}</h1>
       <form onSubmit={submitForm}>
         <input
+        data-test="registry-amount-input"
           required
           type="number"
           placeholder="Valor"
@@ -32,13 +36,14 @@ export default function AddtransPage() {
           onChange={handleForms}
         />
         <input
+        data-test="registry-name-input" 
           required
           placeholder="Descrição"
           name="description"
           value={forms.description}
           onChange={handleForms}
         />
-        <button type="submit">Salvar {typeText}</button>
+        <button data-test="registry-save" type="submit">Salvar {typeText}</button>
       </form>
     </transContainer>
   )

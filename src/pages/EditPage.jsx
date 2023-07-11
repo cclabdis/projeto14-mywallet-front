@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import {useLocation, useParams} from "react-router-dom"
-import {useForms, useOut} from "../components/hooks/useIn"
-import {useEditTransaction} from "../components/authorizations/trans.jsx"
+import {useForms, useOut} from "../components/hooks/useIn.jsx"
+import {useEditTransaction} from "../components/authorizations/Transactions.jsx"
 
 export default function EdittransPage() {
   const {type} = useParams()
@@ -11,9 +11,17 @@ export default function EdittransPage() {
   useOut()
   const editTransaction = useEditTransaction()
 
+
+
+
+
+
   function submitForm(e) {
     e.preventDefault()
-    editTransaction(_id, {...forms, type: apiType})
+    editTransaction(_id, {
+      ...forms, 
+      type: apiType
+    })
   }
 
   return (
@@ -21,6 +29,7 @@ export default function EdittransPage() {
       <h1>Editar {typeText}</h1>
       <form onSubmit={submitForm}>
         <input
+        data-test="registry-amount-input"
           required
           type="number"
           placeholder="Valor"
@@ -29,13 +38,14 @@ export default function EdittransPage() {
           onChange={handleForms}
         />
         <input
+        data-test="registry-name-input" 
           required
           placeholder="Descrição"
           name="description"
           value={forms.description}
           onChange={handleForms}
         />
-        <button type="submit">Atualizar {typeText}</button>
+        <button data-test="registry-save"  type="submit">Atualizar {typeText}</button>
       </form>
     </transContainer>
   )

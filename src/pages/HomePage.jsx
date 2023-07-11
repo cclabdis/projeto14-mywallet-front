@@ -4,12 +4,15 @@ import {BiExit} from "react-icons/bi"
 import {useNavigate} from "react-router-dom"
 import {useContext} from "react"
 import {AiOutlineMinusCircle, AiOutlinePlusCircle} from "react-icons/ai"
-import AuthContext from "../components/AuthContext"
+import AuthContext from "../components/AuthContext.jsx"
 import {useLogoutAuth} from "../components/authorizations/Auth.jsx"
-import {useOut} from "../components/hooks/useIn"
-import {useGettrans} from "../components/authorizations/trans.jsx"
+import {useOut} from "../components/hooks/useIn.jsx"
+import {useGettrans} from "../components/authorizations/Transactions.jsx"
 
 export default function HomePage() {
+
+
+
   const {userName} = useContext(AuthContext)
   const navigate = useNavigate()
   const logout = useLogoutAuth()
@@ -36,11 +39,15 @@ export default function HomePage() {
         {trans && trans.length > 0 && (
           <ListItemContainer>
             <ul>
-              {/* {trans.map((t) => <TransactionItem key={t._id} transaction={t} gettrans={gettrans} />)} */}
+               {trans.map((t) => 
+               <TransactionItem key={t._id} 
+               transaction={t} 
+               gettrans={gettrans} 
+               />)} 
             </ul>
             <article>
               <strong>Saldo</strong>
-              <Value color={balance > 0 ? "positivo" : "negativo"}>{balance.toString().replace(".", ",")}</Value>
+              <Value data-test="registry-amount" color={balance > 0 ? "positivo" : "negativo"}>{balance.toString().replace(".", ",")}</Value>
             </article>
           </ListItemContainer>
         )}
@@ -48,11 +55,11 @@ export default function HomePage() {
 
 
       <ButtonsContainer>
-        <button onClick={() => navigate("/nova-transacao/entrada")}>
+        <button data-test="new-income"  onClick={() => navigate("/nova-transacao/entrada")}>
           <AiOutlinePlusCircle/>
           <p>Nova <br/> entrada</p>
         </button>
-        <button onClick={() => navigate("/nova-transacao/saida")}>
+        <button data-test="new-expense" onClick={() => navigate("/nova-transacao/saida")}>
           <AiOutlineMinusCircle/>
           <p>Nova <br/>saída</p>
         </button>

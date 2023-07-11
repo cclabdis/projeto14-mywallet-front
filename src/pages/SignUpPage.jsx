@@ -1,7 +1,7 @@
 import {Link, useNavigate} from "react-router-dom"
 import styled from "styled-components"
 import MyWalletLogo from "../components/MyWalletLogo"
-import {useForms, useIn} from "../components/hooks/useIn"
+import {useForms, useIn} from "../components/hooks/useIn.jsx"
 // import { useSignUpAuth } from "../components/authorizations/Auth"
 import axios from "axios";
 // import {useEffect, useState} from "react";

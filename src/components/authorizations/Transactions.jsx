@@ -35,6 +35,7 @@ export function useAddTransaction() {
 
   return (body) => {
     axios.post(`${import.meta.env.VITE_API_URL}/trans`, body, config)
+    // .then(() => navigate("/home"))
       .then(res => navigate("/home"))
       .catch(err => alert(err))
   }

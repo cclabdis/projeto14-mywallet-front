@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import {Link} from "react-router-dom"
 import MyWalletLogo from "../components/MyWalletLogo"
-import {useForms, useIn} from "../components/hooks/useIn"
+import {useForms, useIn} from "../components/hooks/useIn.jsx"
 import {useLoginAuth} from "../components/authorizations/Auth.jsx"
 // import AuthContext from "../components/AuthContext"
 

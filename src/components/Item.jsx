@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import dayjs from "dayjs"
 import {IoMdClose} from "react-icons/io"
-import {useDeleteTransaction} from "./authorizations/trans.jsx"
+import {useDeleteTransaction} from "./authorizations/Transactions.jsx"
 import {useNavigate} from "react-router-dom"
 
 export function TransactionItem({transaction, gettrans}) {
@@ -11,7 +11,9 @@ export function TransactionItem({transaction, gettrans}) {
 
   function onClickDelete() {
     const confirmDelete = window.confirm(`Tem certeza que deseja deletar ${description}?`)
-    if (confirmDelete) deleteTransaction(_id, gettrans)
+    if (confirmDelete) {
+      deleteTransaction(_id, gettrans)
+    }
   }
 
   function onClickEdit() {
@@ -23,14 +25,17 @@ export function TransactionItem({transaction, gettrans}) {
 
   return (
     <ItemContainer>
-      <div>
-        <span>{dayjs(date).format("DD/MM")}</span>
-        <strong onClick={onClickEdit}>{description}</strong>
-      </div>
-      <RightContainer>
-        <Value color={type}>{value.toFixed(2).toString().replace(".", ",")}</Value>
-        <IoMdClose onClick={onClickDelete}/>
-      </RightContainer>
+
+          <div>
+            <span>{dayjs(date).format("DD/MM")}</span>
+            <strong onClick={onClickEdit}>{description}</strong>
+          </div>
+
+          <RightContainer>
+            <Value color={type}>{value.toFixed(2).toString().replace(".", ",")}</Value>
+            <IoMdClose onClick={onClickDelete}/>
+          </RightContainer>
+
     </ItemContainer>
   )
 }

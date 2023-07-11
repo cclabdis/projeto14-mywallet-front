@@ -1,17 +1,17 @@
 import styled from "styled-components"
 import dayjs from "dayjs"
 import {IoMdClose} from "react-icons/io"
-import {useDeleteTransaction} from "./authorizations/Transactions.jsx"
+import {useDeleteTransaction} from "./authorizations/trans.jsx"
 import {useNavigate} from "react-router-dom"
 
-export function TransactionItem({transaction, getTransactions}) {
+export function TransactionItem({transaction, gettrans}) {
   const {_id, date, description, value, type} = transaction
   const deleteTransaction = useDeleteTransaction()
   const navigate = useNavigate()
 
   function onClickDelete() {
     const confirmDelete = window.confirm(`Tem certeza que deseja deletar ${description}?`)
-    if (confirmDelete) deleteTransaction(_id, getTransactions)
+    if (confirmDelete) deleteTransaction(_id, gettrans)
   }
 
   function onClickEdit() {

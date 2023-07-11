@@ -3,10 +3,10 @@ import styled from "styled-components"
 import useQuickOut from "../../hooks/useQuickOut"
 import { useParams } from "react-router-dom"
 import { useForms } from "../components/hooks/useIn"
-import { useAddTransaction } from "../../services/transactions"
+import { useAddTransaction } from "../../services/trans"
 
 
-export default function AddTransactionsPage() {
+export default function AddtransPage() {
   const { forms, handleForms } = useForms({ description: "", value: "" })
   const { type } = useParams()
   const typeText = type === "entrada" ? "Entrada" : "Saída"
@@ -20,7 +20,7 @@ export default function AddTransactionsPage() {
   }
 
   return (
-    <TransactionsContainer>
+    <transContainer>
       <h1>Nova {typeText}</h1>
       <form onSubmit={submitForm}>
         <input
@@ -40,11 +40,11 @@ export default function AddTransactionsPage() {
         />
         <button type="submit">Salvar {typeText}</button>
       </form>
-    </TransactionsContainer>
+    </transContainer>
   )
 }
 
-const TransactionsContainer = styled.main`
+const transContainer = styled.main`
   height: calc(100vh - 50px);
   display: flex;
   flex-direction: column;

@@ -46,14 +46,13 @@ export default function SignUpPage() {
 
   function submitForm(e) {
     e.preventDefault()
-    console.log("alou")
+  
     if (forms.password !== forms.confirmPassword) {
       
       delete forms.confirmPassword
       return alert("Os campos de senhas precisam ser iguais!")
     }
 
-    alert("entrou aqui!1")
     delete forms.confirmPassword
     useSignUpAuth(forms)
 

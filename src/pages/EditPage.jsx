@@ -1,9 +1,9 @@
 import styled from "styled-components"
 import {useLocation, useParams} from "react-router-dom"
 import {useForms, useOut} from "../components/hooks/useIn"
-import {useEditTransaction} from "../components/authorizations/Transactions.jsx"
+import {useEditTransaction} from "../components/authorizations/trans.jsx"
 
-export default function EditTransactionsPage() {
+export default function EdittransPage() {
   const {type} = useParams()
   const {state: {_id, description, value, type: apiType}} = useLocation()
   const {forms, handleForms} = useForms({description, value})
@@ -17,7 +17,7 @@ export default function EditTransactionsPage() {
   }
 
   return (
-    <TransactionsContainer>
+    <transContainer>
       <h1>Editar {typeText}</h1>
       <form onSubmit={submitForm}>
         <input
@@ -37,11 +37,11 @@ export default function EditTransactionsPage() {
         />
         <button type="submit">Atualizar {typeText}</button>
       </form>
-    </TransactionsContainer>
+    </transContainer>
   )
 }
 
-const TransactionsContainer = styled.section`
+const transContainer = styled.section`
   height: calc(100vh - 50px);
   display: flex;
   flex-direction: column;

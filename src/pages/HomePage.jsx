@@ -7,21 +7,21 @@ import {AiOutlineMinusCircle, AiOutlinePlusCircle} from "react-icons/ai"
 import AuthContext from "../components/AuthContext"
 import {useLogoutAuth} from "../components/authorizations/Auth.jsx"
 import {useOut} from "../components/hooks/useIn"
-import {useGetTransactions} from "../components/authorizations/Transactions.jsx"
+import {useGettrans} from "../components/authorizations/trans.jsx"
 
 export default function HomePage() {
   const {userName} = useContext(AuthContext)
   const navigate = useNavigate()
   const logout = useLogoutAuth()
-  const {transactions, getTransactions} = useGetTransactions()
+  const {trans, gettrans} = useGettrans()
   useOut()
 
   function calcBalance() {
-    const sum = transactions.reduce((acc, cur) => cur.type === "income" ? acc + cur.value : acc - cur.value, 0)
+    const sum = trans.reduce((acc, cur) => cur.type === "income" ? acc + cur.value : acc - cur.value, 0)
     return sum.toFixed(2)
   }
 
-  const balance = transactions && calcBalance()
+  const balance = trans && calcBalance()
 
   return (
     <HomeContainer>
@@ -30,13 +30,13 @@ export default function HomePage() {
         <BiExit onClick={logout}/>
       </Header>
 
-      <TransactionsContainer>
-        {!transactions && <Oval color={mainColor} secondaryColor={mainColorLight}/>}
-        {transactions && transactions.length === 0 && <>Não há registros de entrada ou saída</>}
-        {transactions && transactions.length > 0 && (
+      <transContainer>
+        {!trans && <Oval color={mainColor} secondaryColor={mainColorLight}/>}
+        {trans && trans.length === 0 && <>Não há registros de entrada ou saída</>}
+        {trans && trans.length > 0 && (
           <ListItemContainer>
             <ul>
-              {/* {transactions.map((t) => <TransactionItem key={t._id} transaction={t} getTransactions={getTransactions} />)} */}
+              {/* {trans.map((t) => <TransactionItem key={t._id} transaction={t} gettrans={gettrans} />)} */}
             </ul>
             <article>
               <strong>Saldo</strong>
@@ -44,7 +44,7 @@ export default function HomePage() {
             </article>
           </ListItemContainer>
         )}
-      </TransactionsContainer>
+      </transContainer>
 
 
       <ButtonsContainer>
@@ -83,7 +83,7 @@ const Header = styled.header`
   color: white;
 `
 
-const TransactionsContainer = styled.article`
+const transContainer = styled.article`
   flex-grow: 1;
   background-color: #fff;
   color: #000;

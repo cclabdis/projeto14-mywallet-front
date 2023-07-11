@@ -5,8 +5,8 @@ import {useNavigate} from "react-router-dom"
 
 
 /// refazer todo que nada funciona
-export function useGetTransactions() {
-  const [transactions, setTransactions] = useState(undefined)
+export function useGettrans() {
+  const [trans, settrans] = useState(undefined)
   const {token} = useContext(AuthContext)
 
   const config = {
@@ -14,17 +14,17 @@ export function useGetTransactions() {
       {Authorization: `Bearer ${token}`}
   }
 
-  function getTransactions() {
-    axios.get(`${import.meta.env.VITE_API_URL}/transactions`, config)
-      .then(res => setTransactions(res.data))
+  function gettrans() {
+    axios.get(`${import.meta.env.VITE_API_URL}/trans`, config)
+      .then(res => settrans(res.data))
       .catch(err => alert(err.response.data))
   }
 
   useEffect(() => {
-    getTransactions()
+    gettrans()
   }, [])
 
-  return {transactions, getTransactions}
+  return {trans, gettrans}
 }
 
 export function useAddTransaction() {
@@ -34,7 +34,7 @@ export function useAddTransaction() {
   const config = {headers: {Authorization: `Bearer ${token}`}}
 
   return (body) => {
-    axios.post(`${import.meta.env.VITE_API_URL}/transactions`, body, config)
+    axios.post(`${import.meta.env.VITE_API_URL}/trans`, body, config)
       .then(res => navigate("/home"))
       .catch(err => alert(err))
   }
@@ -45,9 +45,9 @@ export function useDeleteTransaction() {
   const {token} = useContext(AuthContext)
   const config = {headers: {Authorization: `Bearer ${token}`}}
 
-  return (id, getTransactions) => {
-    axios.delete(`${import.meta.env.VITE_API_URL}/transactions/${id}`, config)
-      .then(res => getTransactions())
+  return (id, gettrans) => {
+    axios.delete(`${import.meta.env.VITE_API_URL}/trans/${id}`, config)
+      .then(res => gettrans())
       .catch(err => alert(err))
   }
 }
@@ -58,7 +58,7 @@ export function useEditTransaction() {
   const navigate = useNavigate()
 
   return (id, body) => {
-    axios.put(`${import.meta.env.VITE_API_URL}/transactions/${id}`, body, config)
+    axios.put(`${import.meta.env.VITE_API_URL}/trans/${id}`, body, config)
       .then(res => navigate("/home"))
       .catch(err => alert(err))
   }

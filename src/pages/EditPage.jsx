@@ -1,19 +1,19 @@
 import styled from "styled-components"
-import { useLocation, useParams } from "react-router-dom"
-import { useForms, useOut } from "../components/hooks/useIn"
-import { useEditTransaction } from "../components/authorizations/transactions"
+import {useLocation, useParams} from "react-router-dom"
+import {useForms, useOut} from "../components/hooks/useIn"
+import {useEditTransaction} from "../components/authorizations/Transactions.jsx"
 
 export default function EditTransactionsPage() {
-  const { type } = useParams()
-  const { state: { _id, description, value, type: apiType } } = useLocation()
-  const { forms, handleForms} = useForms({ description, value })
+  const {type} = useParams()
+  const {state: {_id, description, value, type: apiType}} = useLocation()
+  const {forms, handleForms} = useForms({description, value})
   const typeText = type === "entrada" ? "Entrada" : "Saída"
   useOut()
   const editTransaction = useEditTransaction()
 
   function submitForm(e) {
     e.preventDefault()
-    editTransaction(_id, { ...forms, type: apiType })
+    editTransaction(_id, {...forms, type: apiType})
   }
 
   return (

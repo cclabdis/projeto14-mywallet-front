@@ -1,19 +1,19 @@
 import styled from "styled-components"
-// import { Oval } from "react-loader-spinner"
-import { BiExit } from "react-icons/bi"
-import { useNavigate } from "react-router-dom"
-import { useContext } from "react"
-import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai"
+import {Oval} from "react-loader-spinner"
+import {BiExit} from "react-icons/bi"
+import {useNavigate} from "react-router-dom"
+import {useContext} from "react"
+import {AiOutlineMinusCircle, AiOutlinePlusCircle} from "react-icons/ai"
 import AuthContext from "../components/AuthContext"
-import { useLogoutAuth } from "../components/authorizations/auth"
+import {useLogoutAuth} from "../components/authorizations/Auth.jsx"
 import {useOut} from "../components/hooks/useIn"
-import { useGetTransactions } from "../components/authorizations/transactions"
+import {useGetTransactions} from "../components/authorizations/Transactions.jsx"
 
 export default function HomePage() {
-  const { userName } = useContext(AuthContext)
+  const {userName} = useContext(AuthContext)
   const navigate = useNavigate()
   const logout = useLogoutAuth()
-  const { transactions, getTransactions } = useGetTransactions()
+  const {transactions, getTransactions} = useGetTransactions()
   useOut()
 
   function calcBalance() {
@@ -27,11 +27,11 @@ export default function HomePage() {
     <HomeContainer>
       <Header>
         <h1>Olá, {userName}</h1>
-        <BiExit onClick={logout} />
+        <BiExit onClick={logout}/>
       </Header>
 
       <TransactionsContainer>
-        {!transactions && <Oval color={mainColor} secondaryColor={mainColorLight} />}
+        {!transactions && <Oval color={mainColor} secondaryColor={mainColorLight}/>}
         {transactions && transactions.length === 0 && <>Não há registros de entrada ou saída</>}
         {transactions && transactions.length > 0 && (
           <ListItemContainer>
@@ -49,12 +49,12 @@ export default function HomePage() {
 
       <ButtonsContainer>
         <button onClick={() => navigate("/nova-transacao/entrada")}>
-          <AiOutlinePlusCircle />
-          <p>Nova <br /> entrada</p>
+          <AiOutlinePlusCircle/>
+          <p>Nova <br/> entrada</p>
         </button>
         <button onClick={() => navigate("/nova-transacao/saida")}>
-          <AiOutlineMinusCircle />
-          <p>Nova <br />saída</p>
+          <AiOutlineMinusCircle/>
+          <p>Nova <br/>saída</p>
         </button>
       </ButtonsContainer>
 
@@ -63,10 +63,10 @@ export default function HomePage() {
 }
 
 const mainColor = styled.p`
-color: #8c11be
+  color: #8c11be
 `
 const mainColorLight = styled.p`
-color: #a679b8
+  color: #a679b8
 `
 const HomeContainer = styled.div`
   display: flex;
@@ -92,9 +92,11 @@ const TransactionsContainer = styled.article`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
   article {
     display: flex;
-    justify-content: space-between;   
+    justify-content: space-between;
+
     strong {
       font-weight: 700;
       text-transform: uppercase;
@@ -106,7 +108,7 @@ const ButtonsContainer = styled.section`
   margin-bottom: 0;
   display: flex;
   gap: 15px;
-  
+
   button {
     width: 50%;
     height: 115px;
@@ -115,6 +117,7 @@ const ButtonsContainer = styled.section`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
     p {
       font-size: 18px;
     }
@@ -132,6 +135,7 @@ const ListItemContainer = styled.li`
   margin-bottom: 8px;
   color: #000000;
   margin-right: 10px;
+
   div span {
     color: #c6c6c6;
     margin-right: 10px;

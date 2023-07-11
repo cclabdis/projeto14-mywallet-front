@@ -1,13 +1,17 @@
-import { Link } from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 import styled from "styled-components"
 import MyWalletLogo from "../components/MyWalletLogo"
-import { useIn, useForms } from "../components/hooks/useIn"
-import { useSignUpAuth } from "../components/authorizations/auth"
+import {useForms, useIn} from "../components/hooks/useIn"
+// import { useSignUpAuth } from "../components/authorizations/Auth"
+import axios from "axios";
+// import {useEffect, useState} from "react";
+
 
 export default function SignUpPage() {
   // const [loading,setLoading] = useState(false);
-
-  const { forms, handleForms } = useForms(
+  const navigate = useNavigate()
+  
+  const {forms, handleForms} = useForms(
     {
       name: "",
       email: "",
@@ -16,19 +20,61 @@ export default function SignUpPage() {
     })
   useIn()
 
+  // const [loggedUser, setLoggedUser] = useState([]);
+  
+
+  // function useSignUpAuth(forms)  {
+  //   	axios.post(`${import.meta.env.VITE_API_URL}/login`,  {
+  //     name: "",
+  //     email: "",
+  //     password: ""
+  //   })
+  //   		.then(() => {
+  //   			navigate("/");
+  //   		})
+  //   		.catch(err => alert(err))
+  //     } 
+
+
+  function useSignUpAuth(forms)  {
+    	axios.post(`${import.meta.env.VITE_API_URL}}/sign-up`, forms)
+    		.then(() => {
+    			navigate("/");
+    		})
+    		.catch(err => console.log(err))
+      } 
+
   function submitForm(e) {
     e.preventDefault()
-    if (forms.password != forms.confirmPassword) {
+    console.log("alou")
+    if (forms.password !== forms.confirmPassword) {
+      
       delete forms.confirmPassword
       return alert("Os campos de senhas precisam ser iguais!")
     }
+
+    alert("entrou aqui!1")
+    delete forms.confirmPassword
     useSignUpAuth(forms)
+
+
+    // return () =>
+    // const res = axios.post(`${import.meta.env.VITE_API_URL}}/sign-up`, forms).then(res => res)
+    //   .catch(err => alert(err))
+
+    // if (res.status >= 200 && res.status <= 299) {
+
+    //   useEffect(() => {
+    //     navigate("/")
+    //   }, [])
+    // }
+
   }
 
   return (
     <SingUpContainer>
-      <form >
-        <MyWalletLogo />
+      <form onSubmit={submitForm}>
+        <MyWalletLogo/>
         <input
           data-test="name"
           type="text"
@@ -70,8 +116,7 @@ export default function SignUpPage() {
           value={forms.confirmPassword}
           onChange={handleForms}
         />
-        <button 
-          onClick={submitForm}
+        <button
           data-test="sign-up-submit"
           type="submit">
           Cadastrar
@@ -81,6 +126,7 @@ export default function SignUpPage() {
       <Link to="/">
         Já tem uma conta? Entre agora!
       </Link>
+      
     </SingUpContainer>
   )
 }

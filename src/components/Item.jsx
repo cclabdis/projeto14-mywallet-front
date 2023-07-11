@@ -1,11 +1,11 @@
 import styled from "styled-components"
 import dayjs from "dayjs"
-import { IoMdClose } from "react-icons/io"
-import { useDeleteTransaction } from "./authorizations/transactions"
-import { useNavigate } from "react-router-dom"
+import {IoMdClose} from "react-icons/io"
+import {useDeleteTransaction} from "./authorizations/Transactions.jsx"
+import {useNavigate} from "react-router-dom"
 
-export default function TransactionItem({ transaction, getTransactions }) {
-  const { _id, date, description, value, type } = transaction
+export function TransactionItem({transaction, getTransactions}) {
+  const {_id, date, description, value, type} = transaction
   const deleteTransaction = useDeleteTransaction()
   const navigate = useNavigate()
 
@@ -17,7 +17,7 @@ export default function TransactionItem({ transaction, getTransactions }) {
   function onClickEdit() {
     navigate(
       `/editar-transacao/${type === "expense" ? "saida" : "entrada"}`,
-      { state: transaction }
+      {state: transaction}
     )
   }
 
@@ -29,7 +29,7 @@ export default function TransactionItem({ transaction, getTransactions }) {
       </div>
       <RightContainer>
         <Value color={type}>{value.toFixed(2).toString().replace(".", ",")}</Value>
-        <IoMdClose onClick={onClickDelete} />
+        <IoMdClose onClick={onClickDelete}/>
       </RightContainer>
     </ItemContainer>
   )
@@ -41,6 +41,7 @@ const ItemContainer = styled.li`
   align-items: center;
   margin-bottom: 20px;
   color: ${"black"};
+
   div span {
     color: ${"#c6c6c6"};
     margin-right: 10px;

@@ -1,22 +1,19 @@
 import styled from "styled-components"
-import { Link } from "react-router-dom"
+import {Link} from "react-router-dom"
 import MyWalletLogo from "../components/MyWalletLogo"
-import { useIn, useForms} from "../components/hooks/useIn"
-import { useLoginAuth } from "../components/authorizations/auth"
+import {useForms, useIn} from "../components/hooks/useIn"
+import {useLoginAuth} from "../components/authorizations/Auth.jsx"
 // import AuthContext from "../components/AuthContext"
-
-
-
 
 export default function SignInPage() {
 
-  const { forms, handleForms } = useForms({ email: "", password: "" })
+  const {forms, handleForms} = useForms({email: "", password: ""})
   const login = useLoginAuth()
   useIn()
 
   function submitForms(e) {
     e.preventDefault()
-    
+
     login(forms)
   }
 
@@ -24,7 +21,7 @@ export default function SignInPage() {
   return (
     <SingInContainer>
       <form onSubmit={submitForms}>
-        <MyWalletLogo />
+        <MyWalletLogo/>
         <input
           data-test="email"
           required

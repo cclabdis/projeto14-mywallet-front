@@ -3,6 +3,8 @@ import { Link } from "react-router-dom"
 import MyWalletLogo from "../components/MyWalletLogo"
 import { useIn, useForms} from "../components/hooks/useIn"
 import { useLoginAuth } from "../components/authorizations/auth"
+// import AuthContext from "../components/AuthContext"
+
 
 
 
@@ -14,6 +16,7 @@ export default function SignInPage() {
 
   function submitForms(e) {
     e.preventDefault()
+    
     login(forms)
   }
 

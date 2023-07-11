@@ -4,43 +4,41 @@ import MyWalletLogo from "../components/MyWalletLogo"
 import { useIn, useForms } from "../components/hooks/useIn"
 import { useSignUpAuth } from "../components/authorizations/auth"
 
-
-
 export default function SignUpPage() {
+  // const [loading,setLoading] = useState(false);
 
   const { forms, handleForms } = useForms(
-    { name: "", 
-    email: "", 
-    password: "", 
-    confirmPassword: "" 
-  })
+    {
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: ""
+    })
   useIn()
 
-
-  const signUp = useSignUpAuth()
-
-  function submitForm(e) 
-    {e.preventDefault()
-    if (forms.password !== forms.confirmPassword) return alert("As senhas divergem")
-
-    delete forms.confirmPassword
-    signUp(forms)
+  function submitForm(e) {
+    e.preventDefault()
+    if (forms.password != forms.confirmPassword) {
+      delete forms.confirmPassword
+      return alert("Os campos de senhas precisam ser iguais!")
+    }
+    useSignUpAuth(forms)
   }
-
 
   return (
     <SingUpContainer>
-      <form onSubmit={submitForm}>
+      <form >
         <MyWalletLogo />
-        <input 
-          data-test="name" 
+        <input
+          data-test="name"
+          type="text"
           required
           placeholder="Nome"
           name="name"
           value={forms.name}
           onChange={handleForms}
         />
-        <input 
+        <input
           data-test="email"
           required
           type="email"
@@ -50,8 +48,8 @@ export default function SignUpPage() {
           value={forms.email}
           onChange={handleForms}
         />
-        <input  
-          data-test="password" 
+        <input
+          data-test="password"
           required
           minLength={3}
           type="password"
@@ -61,8 +59,8 @@ export default function SignUpPage() {
           value={forms.password}
           onChange={handleForms}
         />
-        <input 
-          data-test="conf-password" 
+        <input
+          data-test="conf-password"
           required
           minLength={3}
           type="password"
@@ -73,8 +71,9 @@ export default function SignUpPage() {
           onChange={handleForms}
         />
         <button 
-        data-test="sign-up-submit" 
-        type="submit">
+          onClick={submitForm}
+          data-test="sign-up-submit"
+          type="submit">
           Cadastrar
         </button>
       </form>

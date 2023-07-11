@@ -10,7 +10,7 @@ export function useSignUpAuth() {
     return (body) => {
         axios.post(`${import.meta.env.VITE_API_URL}}/sign-up`, body)
             .then(res => navigate("/"))
-            .catch(err => alert(err.response.data))
+            .catch(err => alert(err))
     }
 }
 
@@ -26,6 +26,23 @@ export function useLoginAuth() {
                 localStorage.setItem("token", res.data.token)
                 localStorage.setItem("userName", res.data.userName)
                 navigate("/home")
+            })
+            .catch((err) => alert(err.response.data))
+    }
+}
+
+export function useLogoutAuth() {
+    const { token, setToken, setUserName } = useContext(AuthContext)
+    const navigate = useNavigate()
+    const config = { headers: { Authorization: `Bearer ${token}` } }
+
+    return () => {
+        axios.post(`${import.meta.env.VITE_API_URL}/logout`, {}, config)
+            .then(() => {
+                setToken(undefined)
+                setUserName(undefined)
+                localStorage.clear()
+                navigate("/")
             })
             .catch((err) => alert(err.response.data))
     }

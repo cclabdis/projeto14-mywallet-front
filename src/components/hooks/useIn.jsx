@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-
 import AuthContext from "../AuthContext"
 
 
@@ -25,4 +24,15 @@ export function useForms(initialForms) {
     }
 
     return { forms, handleForms }
+}
+
+//saida
+
+export  function useOut() {
+    const { userName, token } = useContext(AuthContext)
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (!token || !userName) navigate("/")
+    }, [])
 }

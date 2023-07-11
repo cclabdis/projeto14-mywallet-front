@@ -1,47 +1,58 @@
 import styled from "styled-components"
+// import { Oval } from "react-loader-spinner"
 import { BiExit } from "react-icons/bi"
+import { useNavigate } from "react-router-dom"
+import { useContext } from "react"
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai"
+import AuthContext from "../components/AuthContext"
+import { useLogoutAuth } from "../components/authorizations/auth"
+import {useOut} from "../components/hooks/useIn"
+import { useGetTransactions } from "../components/authorizations/transactions"
 
 export default function HomePage() {
+  const { userName } = useContext(AuthContext)
+  const navigate = useNavigate()
+  const logout = useLogoutAuth()
+  const { transactions, getTransactions } = useGetTransactions()
+  useOut()
+
+  function calcBalance() {
+    const sum = transactions.reduce((acc, cur) => cur.type === "income" ? acc + cur.value : acc - cur.value, 0)
+    return sum.toFixed(2)
+  }
+
+  const balance = transactions && calcBalance()
+
   return (
     <HomeContainer>
       <Header>
-        <h1>Olá, Fulano</h1>
-        <BiExit />
+        <h1>Olá, {userName}</h1>
+        <BiExit onClick={logout} />
       </Header>
 
       <TransactionsContainer>
-        <ul>
+        {!transactions && <Oval color={mainColor} secondaryColor={mainColorLight} />}
+        {transactions && transactions.length === 0 && <>Não há registros de entrada ou saída</>}
+        {transactions && transactions.length > 0 && (
           <ListItemContainer>
-            <div>
-              <span>30/11</span>
-              <strong>Almoço mãe</strong>
-            </div>
-            <Value color={"negativo"}>120,00</Value>
+            <ul>
+              {/* {transactions.map((t) => <TransactionItem key={t._id} transaction={t} getTransactions={getTransactions} />)} */}
+            </ul>
+            <article>
+              <strong>Saldo</strong>
+              <Value color={balance > 0 ? "positivo" : "negativo"}>{balance.toString().replace(".", ",")}</Value>
+            </article>
           </ListItemContainer>
-
-          <ListItemContainer>
-            <div>
-              <span>15/11</span>
-              <strong>Salário</strong>
-            </div>
-            <Value color={"positivo"}>3000,00</Value>
-          </ListItemContainer>
-        </ul>
-
-        <article>
-          <strong>Saldo</strong>
-          <Value color={"positivo"}>2880,00</Value>
-        </article>
+        )}
       </TransactionsContainer>
 
 
       <ButtonsContainer>
-        <button>
+        <button onClick={() => navigate("/nova-transacao/entrada")}>
           <AiOutlinePlusCircle />
           <p>Nova <br /> entrada</p>
         </button>
-        <button>
+        <button onClick={() => navigate("/nova-transacao/saida")}>
           <AiOutlineMinusCircle />
           <p>Nova <br />saída</p>
         </button>
@@ -51,6 +62,12 @@ export default function HomePage() {
   )
 }
 
+const mainColor = styled.p`
+color: #8c11be
+`
+const mainColorLight = styled.p`
+color: #a679b8
+`
 const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -65,6 +82,7 @@ const Header = styled.header`
   font-size: 26px;
   color: white;
 `
+
 const TransactionsContainer = styled.article`
   flex-grow: 1;
   background-color: #fff;

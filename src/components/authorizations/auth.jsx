@@ -5,7 +5,7 @@ import { useContext } from "react"
 import axios from "axios"
 
 export function useSignUpAuth() {
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
     return (body) => {
         axios.post(`${import.meta.env.VITE_API_URL}}/sign-up`, body)
@@ -15,7 +15,7 @@ export function useSignUpAuth() {
 }
 
 export function useLoginAuth() {
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const { setToken, setUserName } = useContext(AuthContext)
 
     return (body) => {
@@ -33,7 +33,7 @@ export function useLoginAuth() {
 
 export function useLogoutAuth() {
     const { token, setToken, setUserName } = useContext(AuthContext)
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     const config = { headers: { Authorization: `Bearer ${token}` } }
 
     return () => {

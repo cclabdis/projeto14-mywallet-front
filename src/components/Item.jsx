@@ -4,8 +4,6 @@ import { IoMdClose } from "react-icons/io"
 import { useDeleteTransaction } from "./authorizations/transactions"
 import { useNavigate } from "react-router-dom"
 
-
-
 export default function TransactionItem({ transaction, getTransactions }) {
   const { _id, date, description, value, type } = transaction
   const deleteTransaction = useDeleteTransaction()
@@ -37,9 +35,7 @@ export default function TransactionItem({ transaction, getTransactions }) {
   )
 }
 
-
-
- const ItemContainer = styled.li`
+const ItemContainer = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -50,7 +46,7 @@ export default function TransactionItem({ transaction, getTransactions }) {
     margin-right: 10px;
   }
 `
- const Value = styled.div`
+const Value = styled.div`
   font-size: 16px;
   text-align: right;
   margin-right: 8px;
@@ -59,5 +55,5 @@ export default function TransactionItem({ transaction, getTransactions }) {
 const RightContainer = styled.div`
   display: flex;
   color: ${"#c6c6c6"};
-
-`///ansactionItem
+`
+///ansactionItem
